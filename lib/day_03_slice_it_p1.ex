@@ -1,9 +1,9 @@
 defmodule Adventofcode2018.Rect do
-    @enforce_keys [:pos, :size]
-    defstruct [:pos, :size]
+    @enforce_keys [:pos, :size, :id]
+    defstruct [:pos, :size, :id]
 
-    def rect(pos, size) do
-      %Adventofcode2018.Rect{pos: pos, size: size}
+    def rect(id, pos, size) do
+      %Adventofcode2018.Rect{id: id, pos: pos, size: size}
     end
 end
 
@@ -15,8 +15,8 @@ defmodule Adventofcode2018.Day03SliceItP1 do
   import Adventofcode2018.Rect
   import Adventofcode2018.Point2D
 
-  def create_rect(x, y, w, h) do
-    rect(
+  def create_rect(id, x, y, w, h) do
+    rect(id, 
       %Adventofcode2018.Point2D{x: x, y: y},
       %Adventofcode2018.Point2D{x: w, y: h}
     )
@@ -41,16 +41,16 @@ defmodule Adventofcode2018.Day03SliceItP1 do
   end
 
   def parse_input(str) do
-    re = Regex.run(~r/#\d+ \@ (\d+),(\d+): (\d+)x(\d+)/, str)
+    re = Regex.run(~r/#(\d+) \@ (\d+),(\d+): (\d+)x(\d+)/, str)
     if re == nil do
       raise("Invalid input "<> str)
     end
 
-    {x, y, w, h} = re
+    {id, x, y, w, h} = re
       |> Enum.drop(1)
       |> Enum.map(&String.to_integer/1)
       |> List.to_tuple
-    create_rect(x, y, w, h)
+    create_rect(id, x, y, w, h)
   end
 
   def common_squares(input) do

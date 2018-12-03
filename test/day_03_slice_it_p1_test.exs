@@ -24,7 +24,7 @@ defmodule Adventofcode2018.Day03SliceItP1Test do
         {1,1}, {1,2}, {1,3},
         {2,1}, {2,2}, {2,3},
         {3,1}, {3,2}, {3,3}
-      ] = square_points(create_rect(1,1, 3,3))
+      ] = square_points(create_rect(999, 1,1, 3,3))
       |> Enum.to_list
     end
   end
