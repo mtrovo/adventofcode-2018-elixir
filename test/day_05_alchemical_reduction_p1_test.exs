@@ -1,17 +1,27 @@
-defmodule Adventofcode2018.Day05AlchemicalReductionTest do
+defmodule Adventofcode2018.Day05AlchemicalReductionP1Test do
   use Adventofcode2018.AdventCase
-  import Adventofcode2018.Day05AlchemicalReduction
+  import Adventofcode2018.Day05AlchemicalReductionP1
 
-  describe "has_repeated/2" do
-    test "base case: empty list" do
-      assert :not_found = pos_repeated([])
+  describe "react_pass/2" do
+    test "no subst" do
+      assert ~c(abc) = react_pass(~c(abc)) |> Enum.reverse
     end
-    test "base case: found" do
-      assert 0 = pos_repeated(~c(abc), ?A, 1)
+    test "empty case" do
+      assert ~c(abc) = react_pass([], ~c(abc))
     end
-    test "return right position" do
-      assert 8 = pos_repeated(~c(abcabcabcC))
+    test "remove single case" do
+      assert ~c() = react_pass(~c(aA))
+      assert ~c() = react_pass(~c(Aa))
+      assert ~c(c) = react_pass(~c(caA))
+      assert ~c(c) = react_pass(~c(Aac))
     end
+    test "remove all cases" do
+      assert ~c(C) = react_pass(~c(aAbBCaA))
+    end
+    test "leave nested cases" do
+      assert ~c(aA) = react_pass(~c(abBA)) |> Enum.reverse
+    end
+    
   end
 
   describe "react/1" do
@@ -30,6 +40,11 @@ defmodule Adventofcode2018.Day05AlchemicalReductionTest do
     test "should work on both char cases" do
       assert 0 = "Aa" |> polymer_size()
       assert 0 = "aA" |> polymer_size()
+    end
+
+    test "should return correct length" do
+      assert 3 = "abCaBaAbDdAbBaAcd" |> polymer_size()
+      assert 3 = "abCaBAabDdAbBaAcd" |> polymer_size()
     end
 
     test_with_puzzle_input do

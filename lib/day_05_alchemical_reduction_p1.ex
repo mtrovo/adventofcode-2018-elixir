@@ -1,28 +1,32 @@
-defmodule Adventofcode2018.Day05AlchemicalReduction do
+defmodule Adventofcode2018.Day05AlchemicalReductionP1 do
   use Adventofcode2018
 
-  def pos_repeated(cs, last \\ ?0, pos \\ 0)
-  def pos_repeated([c|_], last, pos) when c - last |> abs == 32 do pos-1 end
-  def pos_repeated([], _, _) do :not_found end
-  def pos_repeated([c|cs], _, pos) do
-    pos_repeated(cs, c, pos+1)
+  def react_pass(cs, res \\ [])
+  def react_pass([], res) do res end
+  def react_pass([a, b | cs], res) when abs(a - b) == 32 do
+    react_pass(cs, res) 
+  end
+  def react_pass([a | cs], res) do
+    react_pass(cs, [a|res])
   end
 
   def react(cs) do
-    case pos_repeated(cs) do
-      :not_found -> cs
-      pos -> (cs |> Enum.take(pos)) ++ (cs |> Enum.drop(pos+2))
-        |> react
+    case react_pass(cs) |> Enum.reverse do
+      ^cs -> cs
+      newcs -> react(newcs)
     end
+  end
+  
+  def react_length(cs) do
+    cs
+    |> react
+    |> length
   end
 
   def polymer_size(input) do
-    polymer = input
+    input
     |> String.trim
     |> String.to_charlist
-
-    polymer
-    |> react
-    |> length
+    |> react_length
   end
 end
