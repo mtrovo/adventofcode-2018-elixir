@@ -79,7 +79,7 @@ defmodule Adventofcode2018.Day04ReposeRecordP1 do
         }
       %Adventofcode2018.GuardAwake{min: min} ->
         new_shift = %Adventofcode2018.GuardShift{state.cur_shift | 
-          sleeps: [state.sleep_start..min | state.cur_shift.sleeps]
+          sleeps: [state.sleep_start..(min-1) | state.cur_shift.sleeps]
         }
         %Adventofcode2018.ParseState{state | cur_shift: new_shift}
       %Adventofcode2018.GuardAsleep{min: min} ->
