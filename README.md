@@ -1,6 +1,8 @@
-# Adventofcode2018
+# Advent of Code 2018
 
-**TODO: Add description**
+My attempt at [Advent of Code 2018](https://adventofcode.com/2018), solving the daily tasks while taking the time to learn some Elixir.
+
+The overall structure of this project was adapted from [scmx/advent-of-code-2018-elixir](https://github.com/scmx/advent-of-code-2018-elixir).
 
 ## Installation
 
