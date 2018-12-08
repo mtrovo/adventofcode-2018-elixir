@@ -1,4 +1,6 @@
 defmodule Adventofcode2018 do
+
+
   defmacro __using__(options) do
     quote do
       import Adventofcode2018
@@ -7,6 +9,14 @@ defmodule Adventofcode2018 do
         read_puzzle_input_for(__MODULE__, unquote(options))
       end
     end
+  end
+
+  defmodule Edge do
+    defstruct [:src, :dst]
+  end
+
+  def edge(a, b) do
+    %Edge{src: a, dst: b}
   end
 
   @doc false

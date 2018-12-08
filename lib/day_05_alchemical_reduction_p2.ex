@@ -8,13 +8,13 @@ defmodule Adventofcode2018.Day05AlchemicalReductionP2 do
   def remove_letter([c | cs], rm) do
     [c | remove_letter(cs, rm)]
   end
-  
+
   def rm_unit_length(input) do
     polymer = input
     |> String.trim
     |> String.to_charlist
 
-    range = ?a..?z
+    ?a..?z
     |> Enum.to_list
     |> Stream.map(&remove_letter(polymer, &1))
     |> Stream.map(&react_length/1)

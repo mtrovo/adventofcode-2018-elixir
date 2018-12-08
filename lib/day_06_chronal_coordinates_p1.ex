@@ -23,7 +23,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
     bounding_box(cs, {topx, topy, botx, boty})
   end
 
-  def neighbours({x, y}, id, lvl) do 
+  def neighbours({x, y}, id, lvl) do
     [
       {{x, y+1}, id, lvl},
       {{x, y-1}, id, lvl},
@@ -31,27 +31,27 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
       {{x-1, y}, id, lvl},
     ]
   end
-  
+
   def to_points({topx, topy, botx, boty}) do
     rx = topx..botx
     ry = topy..boty
-    
+
     rx
     |> Enum.flat_map(fn x ->
       ry |> Enum.map(&({x,&1}))
     end)
     |> Enum.into(%{}, &({&1, {-1, not_visited()}}))
   end
-  
+
   def ids_on_border({topx, topy, botx, boty}, filled_map) do
     [
       topx..botx
-      |> Enum.flat_map(fn x -> 
+      |> Enum.flat_map(fn x ->
         [topy, boty]
         |> Enum.map(&({x, &1}))
       end),
       topy..boty
-      |> Enum.flat_map(fn y -> 
+      |> Enum.flat_map(fn y ->
         [topx, botx]
         |> Enum.map(&({&1, y}))
       end),
@@ -63,7 +63,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
 
   def debug_map({topx, topy, botx, boty}, points) do
     topx..botx
-    |> Enum.map(fn x -> 
+    |> Enum.map(fn x ->
       topy..boty
       |> Enum.map(fn y ->
         case points[{x,y}] do
@@ -87,7 +87,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
   def visit(points, {[], []}) do points end
   def visit(points, to_visit) do
     {{:value, {point, id, level}}, to_visit} = :queue.out(to_visit)
-    
+
     if points[point] == nil do
       visit(points, to_visit)
     else
@@ -109,7 +109,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
     coords = input
     |> String.split("\n", trim: true)
     |> Enum.map(&parse_line/1)
-    
+
     states = Enum.zip([coords, @ids, Stream.cycle([0])])
 
     bbox = states
@@ -125,7 +125,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
     id_freqs(Map.values(filled_map))
     |> Map.drop(ids_on_border(bbox, filled_map))
     |> Map.to_list
-    |> Enum.max_by(fn {k,v} -> v end)
+    |> Enum.max_by(fn {_,v} -> v end)
     |> elem(1)
   end
 end
