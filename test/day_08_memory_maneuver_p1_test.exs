@@ -10,14 +10,16 @@ defmodule Adventofcode2018.Day08MemoryManeuverP1Test do
 
   describe "parse_nodes/2" do
     nodes = [
-      node(2, [1,1,2]),
+      node(2, [1, 1, 2]),
       node(1, [2]),
       node(0, [99]),
       node(0, [10, 11, 12])
     ]
-    assert {[], ^nodes} = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
-    |> parse_input
-    |> parse_nodes
+
+    assert {[], ^nodes} =
+             "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+             |> parse_input
+             |> parse_nodes
   end
 
   describe "metadata_sum/1" do

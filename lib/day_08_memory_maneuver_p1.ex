@@ -23,12 +23,13 @@ defmodule Adventofcode2018.Day08MemoryManeuverP1 do
 
   def parse_nodes([childs, metadata_size | tail], nodes) do
     {tail, nodes} =
-    if childs > 0 do
-      1..childs
-      |> Enum.reduce({tail, nodes}, fn (_, {t, n}) -> parse_nodes(t, n) end)
-    else
-      {tail, nodes}
-    end
+      if childs > 0 do
+        1..childs
+        |> Enum.reduce({tail, nodes}, fn _, {t, n} -> parse_nodes(t, n) end)
+      else
+        {tail, nodes}
+      end
+
     {metadata, tail} = Enum.split(tail, metadata_size)
     {tail, [node(childs, metadata) | nodes]}
   end
@@ -42,7 +43,7 @@ defmodule Adventofcode2018.Day08MemoryManeuverP1 do
     input
     |> parse_input
     |> nodes
-    |> Enum.flat_map(&(&1.metadata))
+    |> Enum.flat_map(& &1.metadata)
     |> Enum.sum()
   end
 end
