@@ -8,7 +8,7 @@ defmodule Adventofcode2018.Day08MemoryManeuverP2Test do
     end
 
     test_with_puzzle_input do
-      assert 1337 = puzzle_input() |> root_node_value()
+      assert 19276 = puzzle_input() |> root_node_value()
     end
   end
 end

@@ -59,7 +59,7 @@ defmodule Adventofcode2018.Day07TheSumOfItsPartsP2Test do
     end
 
     test_with_puzzle_input do
-      assert 1337 = puzzle_input() |> total_duration(60, 5)
+      assert 1081 = puzzle_input() |> total_duration(60, 5)
     end
   end
 end

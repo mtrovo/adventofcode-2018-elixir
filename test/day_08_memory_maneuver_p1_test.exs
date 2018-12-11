@@ -28,7 +28,7 @@ defmodule Adventofcode2018.Day08MemoryManeuverP1Test do
     end
 
     test_with_puzzle_input do
-      assert 1337 = puzzle_input() |> metadata_sum()
+      assert 43825 = puzzle_input() |> metadata_sum()
     end
   end
 end

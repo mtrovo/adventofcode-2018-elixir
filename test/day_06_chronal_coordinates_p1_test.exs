@@ -42,20 +42,6 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1Test do
     end
   end
 
-  describe "bounding_box/1" do
-    test "bounding box for 1 point" do
-      assert {1, 10, 1, 10} = bounding_box([{1, 10}])
-    end
-
-    test "bounding box for 2 points" do
-      assert {1, 1, 10, 10} = bounding_box([{10, 1}, {1, 10}])
-    end
-
-    test "bounding box for N points" do
-      assert {1, 1, 100, 100} = bounding_box([{1, 10}, {10, 1}, {100, 5}, {5, 100}])
-    end
-  end
-
   describe "ids_on_border/2" do
     test "return unique border elements" do
       assert [:a] =
@@ -103,7 +89,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1Test do
     end
 
     test_with_puzzle_input do
-      assert 1337 = puzzle_input() |> largest_area()
+      assert 3969 = puzzle_input() |> largest_area()
     end
   end
 end

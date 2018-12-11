@@ -22,7 +22,7 @@ defmodule Adventofcode2018.Day05AlchemicalReductionP2Test do
 
   describe "rm_unit_length/1" do
     test_with_puzzle_input do
-      assert 1337 = puzzle_input() |> rm_unit_length()
+      assert 5774 = puzzle_input() |> rm_unit_length()
     end
   end
 end

@@ -46,12 +46,6 @@ defmodule Adventofcode2018.Day04ReposeRecordP1Test do
     end
   end
 
-  describe "freq_map/1" do
-    test "return frequency map on success" do
-      assert %{a: 1, c: 2, e: 3} = freq_map([:a, :e, :e, :c, :e, :c])
-    end
-  end
-
   describe "aggr_input/2" do
     test "valid shift" do
       assert %{cur_shift: %{id: 1, sleeps: [25..29, 1..9]}} =
