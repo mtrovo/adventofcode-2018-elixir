@@ -105,15 +105,6 @@ defmodule Adventofcode2018.Day04ReposeRecordP1 do
      |> Enum.sum()}
   end
 
-  def freq_map(list) do
-    list
-    |> Enum.group_by(& &1, fn _ -> 1 end)
-    |> Map.to_list()
-    |> Map.new(fn {k, vs} ->
-      {k, length(vs)}
-    end)
-  end
-
   def guard_id_minute(input) do
     state =
       input

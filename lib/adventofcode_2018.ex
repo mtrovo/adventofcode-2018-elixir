@@ -17,6 +17,30 @@ defmodule Adventofcode2018 do
     %Edge{src: a, dst: b}
   end
 
+  def freq_map(list) do
+    list
+    |> Enum.group_by(& &1, fn _ -> 1 end)
+    |> Map.to_list()
+    |> Map.new(fn {k, vs} ->
+      {k, length(vs)}
+    end)
+  end
+
+  def bounding_box(cs, state \\ {9999, 9999, 0, 0})
+
+  def bounding_box([], state) do
+    state
+  end
+
+  def bounding_box([{cx, cy} | cs], {topx, topy, botx, boty}) do
+    topx = if(cx < topx, do: cx, else: topx)
+    botx = if(cx > botx, do: cx, else: botx)
+    topy = if(cy < topy, do: cy, else: topy)
+    boty = if(cy > boty, do: cy, else: boty)
+
+    bounding_box(cs, {topx, topy, botx, boty})
+  end
+
   @doc false
   def read_puzzle_input_for(module, options) do
     fname = Path.join(["input", input_filename(module) <> ".txt"])

@@ -14,21 +14,6 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
     end
   end
 
-  def bounding_box(cs, state \\ {9999, 9999, 0, 0})
-
-  def bounding_box([], state) do
-    state
-  end
-
-  def bounding_box([{cx, cy} | cs], {topx, topy, botx, boty}) do
-    topx = if(cx < topx, do: cx, else: topx)
-    botx = if(cx > botx, do: cx, else: botx)
-    topy = if(cy < topy, do: cy, else: topy)
-    boty = if(cy > boty, do: cy, else: boty)
-
-    bounding_box(cs, {topx, topy, botx, boty})
-  end
-
   def neighbours({x, y}, id, lvl) do
     [
       {{x, y + 1}, id, lvl},
@@ -142,7 +127,7 @@ defmodule Adventofcode2018.Day06ChronalCoordinatesP1 do
       |> to_points()
       |> visit(:queue.from_list(states))
 
-    debug_map(bbox, filled_map)
+    # debug_map(bbox, filled_map)
 
     id_freqs(Map.values(filled_map))
     |> Map.drop(ids_on_border(bbox, filled_map))
