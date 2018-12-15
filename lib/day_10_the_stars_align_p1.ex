@@ -2,11 +2,16 @@ defmodule Adventofcode2018.Day10TheStarsAlignP1 do
   use Adventofcode2018
 
   def parse_line(line) do
-    [x,y, vx,vy] = case Regex.run(~r/position=<\s?(-?\d+), \s?(-?\d+)> velocity=<\s?(-?\d+), \s?(-?\d+)>/, line) do
-      nil -> raise("error parsing line "<>line)
-      [_,x,y, vx,vy] -> [x,y, vx,vy] |> Enum.map(&String.to_integer/1)
-    end
-    {{x,y}, {vx,vy}}
+    [x, y, vx, vy] =
+      case Regex.run(
+             ~r/position=<\s?(-?\d+), \s?(-?\d+)> velocity=<\s?(-?\d+), \s?(-?\d+)>/,
+             line
+           ) do
+        nil -> raise("error parsing line " <> line)
+        [_, x, y, vx, vy] -> [x, y, vx, vy] |> Enum.map(&String.to_integer/1)
+      end
+
+    {{x, y}, {vx, vy}}
   end
 
   def parse_input(input) do
@@ -16,11 +21,13 @@ defmodule Adventofcode2018.Day10TheStarsAlignP1 do
   end
 
   def next(points) do
-      result = points
-      |> Enum.map(fn {{x,y}, {vx,vy}} ->
-        {{x+vx, y+vy}, {vx,vy}}
+    result =
+      points
+      |> Enum.map(fn {{x, y}, {vx, vy}} ->
+        {{x + vx, y + vy}, {vx, vy}}
       end)
-      result
+
+    result
   end
 
   def play_stream(points) do
@@ -36,12 +43,13 @@ defmodule Adventofcode2018.Day10TheStarsAlignP1 do
     if height > 20 do
       false
     else
-      freqs = pos
-      |> Enum.uniq
-      |> Enum.map(&elem(&1, 0))
-      |> freq_map
-      |> Map.values
-      |> freq_map
+      freqs =
+        pos
+        |> Enum.uniq()
+        |> Enum.map(&elem(&1, 0))
+        |> freq_map
+        |> Map.values()
+        |> freq_map
 
       Map.get(freqs, height, 0) > 2
     end
@@ -50,18 +58,18 @@ defmodule Adventofcode2018.Day10TheStarsAlignP1 do
   def sky_string(points) do
     points = points |> Enum.map(&elem(&1, 0))
     {tx, ty, bx, by} = bounding_box(points)
-    fsize = (bx-tx) * (by-ty)
+    fsize = (bx - tx) * (by - ty)
+
     if fsize > 10_000 do
       "ERR: Field too big!" <> to_string(fsize)
     else
-
-      points = points |> MapSet.new
+      points = points |> MapSet.new()
 
       ty..by
       |> Enum.map(fn y ->
         tx..bx
         |> Enum.map(fn x ->
-          if MapSet.member?(points, {x,y}) do
+          if MapSet.member?(points, {x, y}) do
             "#"
           else
             "."
@@ -74,7 +82,8 @@ defmodule Adventofcode2018.Day10TheStarsAlignP1 do
   end
 
   def sky_message(input) do
-    input |> parse_input
+    input
+    |> parse_input
     |> play_stream
     |> Stream.drop_while(&(not sky_aligned(&1)))
     |> Enum.take(1)

@@ -24,15 +24,6 @@ defmodule Adventofcode2018.Day03SliceItP1 do
     )
   end
 
-  def cross_prod([], _) do
-    []
-  end
-
-  def cross_prod([a | as], bs) do
-    Stream.map(bs, &{a, &1})
-    |> Stream.concat(cross_prod(as, bs))
-  end
-
   def square_points(rect) do
     with %Adventofcode2018.Point2D{x: x, y: y} <- rect.pos,
          %Adventofcode2018.Point2D{x: w, y: h} <- rect.size do

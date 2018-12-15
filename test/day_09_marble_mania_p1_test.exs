@@ -23,7 +23,7 @@ defmodule Adventofcode2018.Day09MarbleManiaP1Test do
     end
 
     test_with_puzzle_input do
-      assert 425688 = puzzle_input() |> highest_score()
+      assert 425_688 = puzzle_input() |> highest_score()
     end
   end
 end

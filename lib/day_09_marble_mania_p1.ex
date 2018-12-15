@@ -42,7 +42,7 @@ defmodule Adventofcode2018.Day09MarbleManiaP1 do
 
   def play_marbles([p | players], [marble | marbles], board, scores)
       when rem(marble, 23) == 0 do
-    {head, board} = LinkedList.move_ccw(board, 7) |> LinkedList.delete_head
+    {head, board} = LinkedList.move_ccw(board, 7) |> LinkedList.delete_head()
     add_score = marble + head.val
     scores = scores |> Map.update(p, add_score, &(&1 + add_score))
 

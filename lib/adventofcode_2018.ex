@@ -17,6 +17,15 @@ defmodule Adventofcode2018 do
     %Edge{src: a, dst: b}
   end
 
+  def cross_prod([], _) do
+    []
+  end
+
+  def cross_prod([a | as], bs) do
+    Stream.map(bs, &{a, &1})
+    |> Stream.concat(cross_prod(as, bs))
+  end
+
   def freq_map(list) do
     list
     |> Enum.group_by(& &1, fn _ -> 1 end)

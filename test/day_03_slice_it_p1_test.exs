@@ -2,12 +2,6 @@ defmodule Adventofcode2018.Day03SliceItP1Test do
   use Adventofcode2018.AdventCase
   import Adventofcode2018.Day03SliceItP1
 
-  describe "cross_prod/2" do
-    test "return cross product list" do
-      assert [{1, 2}, {1, 3}, {2, 2}, {2, 3}] = cross_prod([1, 2], [2, 3]) |> Enum.to_list()
-    end
-  end
-
   describe "parse_input/1" do
     test "return rect when correct" do
       assert %Adventofcode2018.Rect{
