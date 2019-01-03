@@ -11,7 +11,7 @@ defmodule Adventofcode2018.Day14ChocolateChartsP2Test do
     end
 
     test_with_puzzle_input do
-      assert 20357548 = "077201" |> recipes_before_sequence("37", 6)
+      assert 20_357_548 = "077201" |> recipes_before_sequence("37", 6)
     end
   end
 end
